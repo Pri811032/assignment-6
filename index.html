@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Number Guessing Game</title>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Enter a number between 1 and 100:</p>
+  <input type="text" id="userInput">
+  <button onclick="startGame()">Start Game</button>
+  <p id="result"></p>
+
+  <script>
+    let secretNumber, numGuesses;
+    const max_guesses= 5;
+
+    function startGame() {
+
+      const userInput = document.getElementById("userInput").value;
+      if (userInput < 1 || userInput > 100 || isNaN(userInput)) {
+        document.getElementById("result").innerHTML = "Please enter a valid number between 1 and 100";
+        return;
+      }
+      secretNumber = Number(userInput);
+
+      numGuesses = 0;
+      document.getElementById("result").innerHTML = "";
+      makeGuess();
+    }
+
+    function makeGuess() {
+
+      numGuesses++;
+      const number= 50;
+      if (number === secretNumber) {
+        document.getElementById("result").innerHTML = "Computer wins! It guessed the number in " + numGuesses + " guesses.";
+        return;
+      }
+
+      if (numGuesses === max_guesses) {
+        document.getElementById("result").innerHTML = "You win! The computer was unable to guess the number.";
+        return;
+      }
+
+      setTimeout(makeGuess, 500);
+    }
+  </script>
+</body>
+</html>
